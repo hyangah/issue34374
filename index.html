@@ -2,6 +2,19 @@
 <html>
 <head>
 <meta http-equiv="origin-trial" content="AoghAotKyTuqiCscRLhuZu0/qntcnX+onAuzrHtiVJ48s/H6AXB9rJ/i3k4iro96nF7NxM5zY4su0lXELEEzzgoAAABSeyJvcmlnaW4iOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAiLCJmZWF0dXJlIjoiV2ViQ29tcG9uZW50c1YwIiwiZXhwaXJ5IjoxNjEyMjIzOTk5fQ==">
+<script src="./webcomponents.min.js"></script>
+<script>
+'use strict';
+
+function onTraceViewerImportFail() {
+  document.addEventListener('DOMContentLoaded', function() {
+    document.body.textContent =
+        './trace_viewer_full.html is missing. ' +
+        'Run vulcanize_trace_viewer from $TRACE_VIEWER and reload.';
+  });
+}
+</script>
+
 <link href="/trace_viewer_full.html" rel="import">
 <style type="text/css">
   html, body {
