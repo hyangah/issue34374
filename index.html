@@ -42,10 +42,10 @@ function onTraceViewerImportFail() {
 
   function load() {
     var req = new XMLHttpRequest();
-    var is_binary = /[.]gz$/.test(url) || /[.]zip$/.test(url);
+    var isBinary = /[.]gz$/.test(url) || /[.]zip$/.test(url);
     req.overrideMimeType('text/plain; charset=x-user-defined');
     req.open('GET', url, true);
-    if (is_binary)
+    if (isBinary)
       req.responseType = 'arraybuffer';
 
     req.onreadystatechange = function(event) {
@@ -54,7 +54,7 @@ function onTraceViewerImportFail() {
 
       window.setTimeout(function() {
         if (req.status === 200)
-          onResult(is_binary ? req.response : req.responseText);
+          onResult(isBinary ? req.response : req.responseText);
         else
           onResultFail(req.status);
       }, 0);
@@ -101,17 +101,17 @@ function onTraceViewerImportFail() {
     overlay.visible = true;
   }
 
-  document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('WebComponentsReady', function() {
     var container = document.createElement('track-view-container');
     container.id = 'track_view_container';
 
     viewer = document.createElement('tr-ui-timeline-view');
     viewer.track_view_container = container;
-    viewer.appendChild(container);
+    Polymer.dom(viewer).appendChild(container);
 
     viewer.id = 'trace-viewer';
     viewer.globalMode = true;
-    document.body.appendChild(viewer);
+    Polymer.dom(document.body).appendChild(viewer);
 
     url = '/data.json';
     load();
